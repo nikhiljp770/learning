@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stores-deploy
+  labels:
+    app: stores-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stores-app
+  template:
+    metadata:
+      labels:
+        app: stores-app
+    spec:
+      containers:
+      - name: stores-app
+        image: nikhil770/stores:2.0
+        ports:
+        - containerPort: 8080

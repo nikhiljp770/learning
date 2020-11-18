@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: star-deploy
+  labels:
+    app: star-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: star-app
+  template:
+    metadata:
+      labels:
+        app: star-app
+    spec:
+      containers:
+      - name: star
+        image: nikhil770/star:1.0
+        ports:
+        - containerPort: 8080

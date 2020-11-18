@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mobile-deploy
+  labels:
+    app: mobile-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mobile-app
+  template:
+    metadata:
+      labels:
+        app: mobile-app
+    spec:
+      containers:
+      - name: mobile
+        image: nikhil770/mobile:2.0
+        ports:
+        - containerPort: 8080

@@ -1,0 +1,14 @@
+version: '3'
+services:
+    reversed:
+        build: .
+        ports:
+           - "6060:8080"      
+    palindrome:
+            build: .
+            ports:
+                - "7070:8081"
+    star:
+        build: .
+        ports:
+            - "9090:8082"

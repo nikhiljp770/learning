@@ -1,0 +1,58 @@
+version: '3'
+
+services: 
+    reverse:
+        build: ./reverse
+        ports:
+            - "6060:8080"
+        volumes: 
+            - reversedata:/usr/app/reverse
+        networks: 
+            - reversenw
+          
+    palindrome:
+        build: ./palindrome
+        
+        volumes: 
+            - reversedata:/usr/app/palindrome
+        networks :
+            - reversenw
+        restart: always
+        depends_on: 
+            - reverse
+        expose: 
+            - "8080"
+
+        
+    star:
+        build: ./star
+        ports: 
+            - "8080:5050"
+        networks: 
+            - starnw
+    nginx:
+        image: nginx:latest
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf:ro
+        depends_on:
+            - palindrome
+        ports:
+            - "2020:7070"
+        networks: 
+            - reversenw
+            
+volumes: 
+     reversedata:
+       
+networks:
+    reversenw:
+        driver: "bridge"
+
+    starnw:
+        driver: "bridge"
+
+    
+
+
+
+

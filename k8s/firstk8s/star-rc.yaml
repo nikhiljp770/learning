@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: star-rc
+spec:
+  replicas: 3
+  selector:
+    app: star-pod
+  template:  
+    metadata:
+      name: star-pod
+      labels:
+        app: star-pod
+    spec:
+      containers:
+        - name: star-container
+          image: nikhil770/star:1.0
+          ports:
+            - containerPort: 8080
